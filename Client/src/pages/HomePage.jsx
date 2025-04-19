@@ -1,9 +1,17 @@
 import React from "react";
 import Footer from "../components/Footer";
+import Homebanner from "../assets/Home and Outdoor/banner.png";
 import banner from "../assets/banner.png";
+import Consumerbanner from "../assets/Consumer Electronics/banner.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa6";
+import {
+  techImage,
+  homeOutdoorItems,
+  consumerElectronicsItems,
+} from "../data/data.js";
+import CountdownTimer from "../components/CountdownTimer.jsx";
 
 // Placeholder images (replace with your actual assets)
 const productImages = {
@@ -31,7 +39,7 @@ const HomePage = () => {
   return (
     <div className="bg-gray-100 text-gray-800">
       {/* Main Content */}
-      <div className=" container mx-auto md:p-6 flex flex-col space-y-6">
+      <div className=" container mx-auto p-4 md:p-6 flex flex-col space-y-6">
         {/* Grid Layout for Desktop, Hidden Sidebars on Mobile */}
         <div className="flex flex-col md:grid md:grid-cols-5 md:gap-3 bg-white p-5 rounded-lg">
           {/* Left Sidebar: Categories (Hidden on Mobile) */}
@@ -61,18 +69,28 @@ const HomePage = () => {
           </div>
 
           {/* Main Banner */}
-          <div className="md:col-span-3">
-            <Link to={""}>
-              <div
-                className="p-4 md:p-6 rounded-lg text-center flex flex-col justify-center h-full "
-                style={{
-                  backgroundImage: `url(${banner})`,
-                  backgroundSize: "contain",
-                  backgroundPosition: "top ",
-                  backgroundRepeat: "no-repeat",
-                }}
-              ></div>
-            </Link>
+          <div className="w-full md:col-span-3">
+            <div
+              className="p-4 sm:p-6 rounded-lg flex flex-col items-start h-[80vh] md:h-full bg-green-200"
+              style={{
+                backgroundImage: `url(${banner})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div className="flex flex-col space-y-3  md:p-8">
+                <p className="text-lg sm:text-xl text-gray-800">
+                  Latest trending
+                </p>
+                <h2 className="text-2xl sm:text-4xl font-bold text-gray-800">
+                  Electronic items
+                </h2>
+                <button className="inline-block bg-white text-gray-800 py-2  rounded-lg border border-gray-300 hover:bg-gray-100">
+                  Learn more
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* Right Sidebar: User and Promos (Hidden on Mobile) */}
@@ -117,30 +135,21 @@ const HomePage = () => {
         </div>
 
         {/* Deals and Offers Section */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold">Deals and offers</h3>
-            <div className="flex space-x-2 text-sm bg-gray-200 px-3 py-1 rounded">
-              <span>04</span>
-              <span>13</span>
-              <span>34</span>
-              <span>56</span>
-            </div>
+        <div className="flex flex-col md:flex-row bg-white p-5 rounded-lg shadow">
+          <div className="flex  md:flex-col md:justify-start justify-between space-y-2 mb-4 p-1 border-r">
+            <span>
+              <h3 className="text-lg font-semibold">Deals and offers</h3>
+              <p className="text-lg text-gray-500">Hygeine Equipments</p>
+            </span>
+            {/* <Countdown date={countdownDate} renderer={renderer} /> */}
+            <CountdownTimer />
           </div>
           {/* Product Grid: Scrollable on Mobile, Grid on Desktop */}
-          <div className="flex overflow-x-auto md:grid md:grid-cols-5 md:gap-4 space-x-4 md:space-x-0">
-            {[
-              { name: "Jacket", discount: "25%", image: productImages.jacket },
-              {
-                name: "Headphones",
-                discount: "25%",
-                image: productImages.headphones,
-              },
-              { name: "Laptop", discount: "25%", image: productImages.laptop },
-            ].map((product, index) => (
+          <div className="flex overflow-x-auto md:grid md:grid-cols-5 md:gap-4 space-x-4 md:space-x-0 hide-scrollbar">
+            {techImage.map((product, index) => (
               <div
                 key={index}
-                className="bg-white p-4 rounded-lg shadow text-center flex-shrink-0 w-40 md:w-auto"
+                className="bg-white p-4 rounded-lg shadow text-center space-y-1 flex-shrink-0 w-40 "
               >
                 <img
                   src={product.image}
@@ -148,10 +157,123 @@ const HomePage = () => {
                   className="w-full h-24 md:h-32 object-contain mb-2"
                 />
                 <h4 className="text-sm font-medium">{product.name}</h4>
-                <p className="text-red-500 text-sm">-{product.discount}</p>
+                <p className="inline-block text-red-500 text-sm font-semibold  px-4 bg-red-200 rounded-xl">
+                  -{product.discount}
+                </p>
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Home and Outdoor */}
+
+        <div className="flex flex-col md:flex-row bg-white rounded-lg shadow">
+          {/* Banner Section */}
+          <h4 className="text-xl py-2 px-4 font-bold text-gray-800 mb-2 md:hidden">
+            Home and Outdoor
+          </h4>
+          <div
+            className="hidden md:flex flex-col justify-start items-start py-8 px-6 w-full md:w-1/3 "
+            style={{
+              backgroundImage: `url(${Homebanner})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-2">
+              Home and Outdoor
+            </h2>
+            <button className="bg-white font-semibold text-gray-800 py-2 px-4 rounded-lg border border-gray-300 hover:bg-gray-100">
+              Source now
+            </button>
+          </div>
+          {/* Product Grid */}
+          <div className="flex overflow-x-auto md:grid md:grid-cols-4 ">
+            {homeOutdoorItems.map((product, index) => (
+              <div
+                key={index}
+                className="flex flex-col-reverse md:flex-row md:items-start justify-between bg-white p-4 text-center border "
+              >
+                <div className="flex flex-col ">
+                  <h4 className="text-lg font-medium text-nowrap text-gray-800">
+                    {product.name}
+                  </h4>
+                  <span className="flex md:flex-col text-nowrap md:text-wrap items-start space-x-1">
+                    <p className="text-md text-gray-600">From</p>
+                    <p className="text-md text-gray-600">USD {product.price}</p>
+                  </span>
+                </div>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="md:relative h-32 w-32 md:h-14 md:w-14 top-6 mr-2 mb-2"
+                />
+              </div>
+            ))}
+          </div>
+          <button className="md:hidden inline-block text-xl font-bold text-start text-blue-400 py-2 px-4 rounded-lg  hover:text-blue-800">
+            Source now
+          </button>
+        </div>
+
+        {/* Consumer Electronics and Gadgets */}
+        <div className="flex flex-col md:flex-row bg-white rounded-lg shadow">
+          {/* Banner Section */}
+          <h4 className="text-xl py-2 px-4 font-bold text-gray-800 mb-2 md:hidden">
+            Consumer Electronics and Gadgets
+          </h4>
+          <div
+            className="hidden md:flex flex-col justify-start items-start py-8 px-6 w-full md:w-1/3 "
+            style={{
+              backgroundImage: `url(${Consumerbanner})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <span className="flex flex-col">
+              <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-2">
+                Consumer
+              </h2>
+              <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-2">
+                Electronics and
+              </h2>
+              <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-2">
+                Gadgets
+              </h2>
+            </span>
+            <button className="bg-white font-semibold text-gray-800 py-2 px-4 rounded-lg border border-gray-300 hover:bg-gray-100">
+              Source now
+            </button>
+          </div>
+          {/* Product Grid */}
+          <div className="flex overflow-x-auto md:grid md:grid-cols-4 ">
+            {consumerElectronicsItems.map((product, index) => (
+              <div
+                key={index}
+                className="flex flex-col-reverse md:flex-row md:items-start justify-between bg-white p-4 text-center border "
+              >
+                <div className="flex flex-col ">
+                  <h4 className="text-lg font-medium text-nowrap text-gray-800">
+                    {product.name}
+                  </h4>
+                  <span className="flex md:flex-col text-nowrap md:text-wrap items-start space-x-1">
+                    <p className="text-md text-gray-600">From</p>
+                    <p className="text-md text-gray-600">USD {product.price}</p>
+                  </span>
+                </div>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="md:relative h-32 w-32 md:h-14 md:w-14 top-6 mr-2 mb-2"
+                />
+              </div>
+            ))}
+          </div>
+          <button className="md:hidden inline-block text-xl font-bold text-start text-blue-400 py-2 px-4 rounded-lg  hover:text-blue-800">
+            Source now
+          </button>
         </div>
       </div>
 
