@@ -1,0 +1,21 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Build output (React)
+/client/dist
+/client/build
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE files (optional, if you use VS Code or others)
+.vscode/
+*.idea/
+
+# OS-generated files
+Thumbs.db
+.DS_Store
