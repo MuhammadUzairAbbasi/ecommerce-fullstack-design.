@@ -1,8 +1,8 @@
 import React from "react";
 import Footer from "../components/Footer";
-import Homebanner from "../assets/Home and Outdoor/banner.png";
+import Homebanner from "../assets/Home&Outdoor_banner.png";
 import banner from "../assets/banner.png";
-import Consumerbanner from "../assets/Consumer Electronics/banner.png";
+import Consumerbanner from "../assets/Consumer_Electronic_banner.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa6";
