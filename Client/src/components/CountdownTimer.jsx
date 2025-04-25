@@ -10,7 +10,7 @@ const renderer = ({ days, hours, minutes, seconds }) => (
     ].map((item, index) => (
       <div
         key={index}
-        className="bg-gray-800 text-white text-center py-2 px-3 rounded-lg w-12"
+        className="bg-gray-600 flex flex-col items-center justify-center text-white text-center py-2 px-3 rounded-lg w-10"
       >
         <span className="text-lg font-semibold">
           {item.value.toString().padStart(2, "0")}

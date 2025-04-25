@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, use } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo-symbol.svg";
 import { FaUser } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 import { searchCategories, navCategories, countryFlags } from "../data/data";
 import { GoSearch } from "react-icons/go";
+import { ProductStore } from "../store/ProductStore";
 import Select from "react-select";
 import {
   US,
@@ -25,6 +26,21 @@ import {
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [localSearchText, setLocalSearchText] = useState("");
+  const [localSelectCategory, setLocalSelectCategory] =
+    useState("All Category");
+
+  const {
+    searchText,
+    selectCategory,
+    setSearchText,
+    setSelectCategory,
+    fetchProducts,
+  } = ProductStore();
+
+  useEffect(() => {
+    fetchProducts();
+  }, [searchText, selectCategory]);
 
   return (
     <header className="bg-white text-gray-800 p-4 sticky top-0 border-b border-base-200 w-full z-40 backdrop-blur-lg">
@@ -51,7 +67,7 @@ const Header = () => {
                 type="text"
                 placeholder="Enter Product Name"
                 className="w-96 p-2"
-                aria-hidden="true"
+                onChange={(e) => setLocalSearchText(e.target.value)}
               />
               <select
                 name="Category"
@@ -60,7 +76,11 @@ const Header = () => {
               >
                 {searchCategories.map((item, index) => (
                   <>
-                    <option key={index} value="All Category">
+                    <option
+                      key={index}
+                      value="All Category"
+                      onClick={() => setLocalSelectCategory(item.label)}
+                    >
                       {item.label}
                     </option>
                   </>
@@ -69,6 +89,10 @@ const Header = () => {
               <button
                 type="submit"
                 className="text-white bg-blue-600 py-2 px-3"
+                onClick={() => {
+                  setSearchText(localSearchText);
+                  setSelectCategory(localSelectCategory);
+                }}
               >
                 Search
               </button>
@@ -170,8 +194,8 @@ const Header = () => {
             <span className="space-x-1">
               Ship to
               <select name="Country" id="">
-                {countryFlags.map((item) => (
-                  <option>{item.code}</option>
+                {countryFlags.map((item, index) => (
+                  <option key={index}>{item.code}</option>
                 ))}
               </select>
             </span>

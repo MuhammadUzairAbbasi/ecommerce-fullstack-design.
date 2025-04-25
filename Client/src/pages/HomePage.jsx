@@ -3,6 +3,10 @@ import Footer from "../components/Footer";
 import Homebanner from "../assets/Home&Outdoor_banner.png";
 import banner from "../assets/banner.png";
 import Consumerbanner from "../assets/Consumer_Electronic_banner.png";
+import CategorySection from "../components/CategorySection.jsx";
+import QuerySection from "../components/HomPageSections/QuerySection";
+import RecommendItems from "../components/HomPageSections/RecommendItems";
+import NewsletterSubscription from "../components/SubscribeNewsletter.jsx";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa6";
@@ -10,6 +14,8 @@ import {
   techImage,
   homeOutdoorItems,
   consumerElectronicsItems,
+  services,
+  countryData,
 } from "../data/data.js";
 import CountdownTimer from "../components/CountdownTimer.jsx";
 
@@ -39,9 +45,9 @@ const HomePage = () => {
   return (
     <div className="bg-gray-100 text-gray-800">
       {/* Main Content */}
-      <div className=" container mx-auto p-4 md:p-6 flex flex-col space-y-6">
+      <div className=" container mx-auto md:p-6 flex flex-col space-y-4">
         {/* Grid Layout for Desktop, Hidden Sidebars on Mobile */}
-        <div className="flex flex-col md:grid md:grid-cols-5 md:gap-3 bg-white p-5 rounded-lg">
+        <div className="flex flex-col md:grid md:grid-cols-5 md:gap-3 bg-white md:p-5 rounded-lg">
           {/* Left Sidebar: Categories (Hidden on Mobile) */}
           <div className="hidden md:block md:col-span-1">
             <ul className="space-y-1 text-sm">
@@ -71,7 +77,7 @@ const HomePage = () => {
           {/* Main Banner */}
           <div className="w-full md:col-span-3">
             <div
-              className="p-4 sm:p-6 rounded-lg flex flex-col items-start h-[80vh] md:h-full bg-green-200"
+              className="p-4 md:rounded-lg h-[30vh] flex flex-col items-start md:h-full "
               style={{
                 backgroundImage: `url(${banner})`,
                 backgroundSize: "cover",
@@ -79,8 +85,8 @@ const HomePage = () => {
                 backgroundRepeat: "no-repeat",
               }}
             >
-              <div className="flex flex-col space-y-3  md:p-8">
-                <p className="text-lg sm:text-xl text-gray-800">
+              <div className="flex flex-col space-y-3 md:p-8">
+                <p className="md:text-lg text-xl text-gray-800">
                   Latest trending
                 </p>
                 <h2 className="text-2xl sm:text-4xl font-bold text-gray-800">
@@ -133,10 +139,9 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-
         {/* Deals and Offers Section */}
-        <div className="flex flex-col md:flex-row bg-white p-5 rounded-lg shadow">
-          <div className="flex  md:flex-col md:justify-start justify-between space-y-2 mb-4 p-1 border-r">
+        <div className="flex flex-col md:flex-row bg-white rounded-lg shadow ">
+          <div className="flex md:w-1/5  md:flex-col md:justify-start justify-between space-y-2 mb-4 p-3 border-r">
             <span>
               <h3 className="text-lg font-semibold">Deals and offers</h3>
               <p className="text-lg text-gray-500">Hygeine Equipments</p>
@@ -145,11 +150,11 @@ const HomePage = () => {
             <CountdownTimer />
           </div>
           {/* Product Grid: Scrollable on Mobile, Grid on Desktop */}
-          <div className="flex overflow-x-auto md:grid md:grid-cols-5 md:gap-4 space-x-4 md:space-x-0 hide-scrollbar">
+          <div className="flex overflow-x-auto md:grid md:grid-cols-5 md:w-4/5  hide-scrollbar">
             {techImage.map((product, index) => (
-              <div
+              <Link
                 key={index}
-                className="bg-white p-4 rounded-lg shadow text-center space-y-1 flex-shrink-0 w-40 "
+                className="bg-white hover:bg-gray-100 p-4 shadow border text-center space-y-1 flex-shrink-0  "
               >
                 <img
                   src={product.image}
@@ -160,123 +165,82 @@ const HomePage = () => {
                 <p className="inline-block text-red-500 text-sm font-semibold  px-4 bg-red-200 rounded-xl">
                   -{product.discount}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
 
-        {/* Home and Outdoor */}
-
-        <div className="flex flex-col md:flex-row bg-white rounded-lg shadow">
-          {/* Banner Section */}
-          <h4 className="text-xl py-2 px-4 font-bold text-gray-800 mb-2 md:hidden">
-            Home and Outdoor
-          </h4>
-          <div
-            className="hidden md:flex flex-col justify-start items-start py-8 px-6 w-full md:w-1/3 "
-            style={{
-              backgroundImage: `url(${Homebanner})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }}
-          >
-            <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-2">
-              Home and Outdoor
-            </h2>
-            <button className="bg-white font-semibold text-gray-800 py-2 px-4 rounded-lg border border-gray-300 hover:bg-gray-100">
-              Source now
-            </button>
-          </div>
-          {/* Product Grid */}
-          <div className="flex overflow-x-auto md:grid md:grid-cols-4 ">
-            {homeOutdoorItems.map((product, index) => (
-              <div
-                key={index}
-                className="flex flex-col-reverse md:flex-row md:items-start justify-between bg-white p-4 text-center border "
-              >
-                <div className="flex flex-col ">
-                  <h4 className="text-lg font-medium text-nowrap text-gray-800">
-                    {product.name}
-                  </h4>
-                  <span className="flex md:flex-col text-nowrap md:text-wrap items-start space-x-1">
-                    <p className="text-md text-gray-600">From</p>
-                    <p className="text-md text-gray-600">USD {product.price}</p>
-                  </span>
-                </div>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="md:relative h-32 w-32 md:h-14 md:w-14 top-6 mr-2 mb-2"
-                />
-              </div>
-            ))}
-          </div>
-          <button className="md:hidden inline-block text-xl font-bold text-start text-blue-400 py-2 px-4 rounded-lg  hover:text-blue-800">
-            Source now
-          </button>
-        </div>
-
+        <CategorySection
+          title={"Home and Outdoor"}
+          bannerImage={Homebanner}
+          products={homeOutdoorItems}
+        />
         {/* Consumer Electronics and Gadgets */}
-        <div className="flex flex-col md:flex-row bg-white rounded-lg shadow">
-          {/* Banner Section */}
-          <h4 className="text-xl py-2 px-4 font-bold text-gray-800 mb-2 md:hidden">
-            Consumer Electronics and Gadgets
-          </h4>
-          <div
-            className="hidden md:flex flex-col justify-start items-start py-8 px-6 w-full md:w-1/3 "
-            style={{
-              backgroundImage: `url(${Consumerbanner})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }}
-          >
-            <span className="flex flex-col">
-              <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-2">
-                Consumer
-              </h2>
-              <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-2">
-                Electronics and
-              </h2>
-              <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-2">
-                Gadgets
-              </h2>
-            </span>
-            <button className="bg-white font-semibold text-gray-800 py-2 px-4 rounded-lg border border-gray-300 hover:bg-gray-100">
-              Source now
-            </button>
-          </div>
-          {/* Product Grid */}
-          <div className="flex overflow-x-auto md:grid md:grid-cols-4 ">
-            {consumerElectronicsItems.map((product, index) => (
-              <div
-                key={index}
-                className="flex flex-col-reverse md:flex-row md:items-start justify-between bg-white p-4 text-center border "
-              >
-                <div className="flex flex-col ">
-                  <h4 className="text-lg font-medium text-nowrap text-gray-800">
-                    {product.name}
-                  </h4>
-                  <span className="flex md:flex-col text-nowrap md:text-wrap items-start space-x-1">
-                    <p className="text-md text-gray-600">From</p>
-                    <p className="text-md text-gray-600">USD {product.price}</p>
-                  </span>
+        <CategorySection
+          title={"Consumer Electronics and Gadgets"}
+          bannerImage={Consumerbanner}
+          products={consumerElectronicsItems}
+        />
+      </div>
+      {/* Quote and Query Section */}
+      <QuerySection />
+      {/* Recommend Items */}
+      <RecommendItems />
+      {/* Extra Services Section */}
+      <div className="md:px-14 mb-4">
+        <h2 className="px-4 text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+          Our Extra Services
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-md overflow-hidden"
+            >
+              <img
+                src={service.image}
+                alt={service.name}
+                className="w-full h-32 object-cover"
+              />
+              <div className="p-4 flex items-center justify-between">
+                <p className="text-sm text-wrap font-medium text-gray-800">
+                  {service.name}
+                </p>
+                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 text-blue-600 rounded-full relative flex items-center justify-center bottom-10">
+                  <service.icon color={"black"} className="" />
                 </div>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="md:relative h-32 w-32 md:h-14 md:w-14 top-6 mr-2 mb-2"
-                />
               </div>
-            ))}
-          </div>
-          <button className="md:hidden inline-block text-xl font-bold text-start text-blue-400 py-2 px-4 rounded-lg  hover:text-blue-800">
-            Source now
-          </button>
+            </div>
+          ))}
         </div>
       </div>
-
+      {/* Services Providing Country */}
+      <div className="md:px-14 mb-4">
+        <h2 className="text-xl px-4 md:text-2xl font-semibold text-gray-800 mb-4">
+          Suppliers by Region
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 px-6 md:px-0">
+          {countryData.map((country) => (
+            <div key={country.code} className="flex items-center">
+              <img
+                src={country.flag}
+                alt={`${country.name} flag`}
+                className="w-8 h-6 mr-2 object-cover"
+              />
+              <div>
+                <p className="text-sm font-medium text-gray-800">
+                  {country.name}
+                </p>
+                <p className="text-xs text-gray-500">
+                  shopname.{country.code.toLowerCase()}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* newsletter Section */}
+      <NewsletterSubscription />
       {/* Footer */}
       <Footer />
     </div>

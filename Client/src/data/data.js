@@ -142,6 +142,62 @@ const consumerElectronicsItems = [
   { name: "Smartphones", image: smartphones, price: "USD 499" },
 ];
 
+const RecommendedItems = [
+  { name: "Cameras", image: cameras, price: "USD 199" },
+  { name: "Electric Kettle", image: electricKettle, price: "USD 29" },
+  { name: "Gaming Sets", image: gamingSet, price: "USD 149" },
+  { name: "Headphones", image: headphones, price: "USD 59" },
+  { name: "Laptops & PCs", image: laptopsAndPC, price: "USD 799" },
+  { name: "Smart Watches", image: SmartWatches, price: "USD 99" },
+  { name: "Smart Devices", image: smart, price: "USD 49" },
+  { name: "Smartphones", image: smartphones, price: "USD 499" },
+];
+
+import service1 from "../assets/Services/image 108.png";
+import service2 from "../assets/Services/image 104.png";
+import service3 from "../assets/Services/image 106.png";
+import service4 from "../assets/Services/image 107.png";
+import { FaSearch, FaBox, FaPlane, FaShieldAlt } from "react-icons/fa";
+
+const services = [
+  { name: "Source from Industry Hubs", image: service1, icon: FaSearch },
+  { name: "Customize Your Products", image: service2, icon: FaBox },
+  {
+    name: "Fast,reliable shipping by ocean or air",
+    image: service3,
+    icon: FaPlane,
+  },
+  {
+    name: "Product monitoring and inspection",
+    image: service4,
+    icon: FaShieldAlt,
+  },
+];
+
+import AE from "../assets/flags/AE.png";
+import AU from "../assets/flags/AU.png";
+import CN from "../assets/flags/CN.png";
+import DE from "../assets/flags/DE.png";
+import DK from "../assets/flags/DK.png";
+import FR from "../assets/flags/FR.png";
+import GB from "../assets/flags/GB.png";
+import IT from "../assets/flags/IT.png";
+import RU from "../assets/flags/RU.png";
+import US from "../assets/flags/US.png";
+
+const countryData = [
+  { code: "AE", name: "Arab Emirates", web: "shopname.ae", flag: AE },
+  { code: "AU", name: "Australia", web: "shopname.ae", flag: AU },
+  { code: "US", name: "United States", web: "shopname.ae", flag: US },
+  { code: "RU", name: "Russia", web: "shopname.ru", flag: RU },
+  { code: "IT", name: "Italy", web: "shopname.it", flag: IT },
+  { code: "DK", name: "Denmark", web: "denmark.com.pk", flag: DK },
+  { code: "FR", name: "France", web: "shopname.com.fr", flag: FR },
+  { code: "DE", name: "Germany", web: "shopname.ae", flag: DE },
+  { code: "CN", name: "China", web: "shopname.ae", flag: CN },
+  { code: "GB", name: "Great Britain", web: "shopname.co.uk", flag: GB },
+];
+
 export {
   searchCategories,
   navCategories,
@@ -150,4 +206,7 @@ export {
   techImage,
   homeOutdoorItems,
   consumerElectronicsItems,
+  RecommendedItems,
+  services,
+  countryData,
 };
