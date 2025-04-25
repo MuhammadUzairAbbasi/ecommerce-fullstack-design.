@@ -5,22 +5,27 @@ const getAllProducts = async (req, res) => {
   try {
     const { category, search } = req.query;
     const query = {};
+
     if (category) {
       query.category = category;
     }
+
     if (search) {
       query.name = {
         $regex: search,
         $options: "i",
       };
     }
+
     const products = await Product.find(query);
-    if (!products) {
-      return res.status(404).json({ message: "Product not found" });
+
+    if (products.length === 0) {
+      return res.status(404).json({ message: "No products found" });
     }
+
     res.json(products);
   } catch (error) {
-    console.log("Error in getAllProduct controller");
+    console.error("Error in getAllProducts controller:", error.message);
     res.status(500).json({ message: "Server Error", error: error.message });
   }
 };
