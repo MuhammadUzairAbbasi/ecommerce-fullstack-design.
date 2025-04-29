@@ -1,20 +1,26 @@
+import express from "express";
 import {
   getAllProducts,
   getProductbyId,
   featuredProducts,
-  createProduct,
-  updateProduct,
-  deleteProduct,
+  getProductbyCategory,
+  DiscountProducts,
+  getConsumerGadetsProducts,
+  HomeProducts,
+  sendInquiry,
+  subscribeNewsletter,
 } from "../controllers/productController.js";
-import express from "express";
 
 const router = express.Router();
 
 router.get("/getAllProducts", getAllProducts);
-router.get("/getProductbyId/:id", getProductbyId);
+router.get("/getProductsbyId/:id", getProductbyId);
+router.get("/getProductsbyCategory/:category", getProductbyCategory);
+router.get("/getDealProducts", DiscountProducts);
 router.get("/featuredProducts", featuredProducts);
-router.post("/createProduct", createProduct);
-router.put("/updateProduct/:id", updateProduct);
-router.delete("/deleteProduct/:id", deleteProduct);
+router.get("/getHomeProducts", HomeProducts);
+router.get("/getConsumerGadetsProducts", getConsumerGadetsProducts);
+router.post("/inquiries/send", sendInquiry);
+router.post("/subscribe", subscribeNewsletter);
 
 export default router;

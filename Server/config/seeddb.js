@@ -226,7 +226,7 @@ const products = [
     stock: 50,
     featured: techImage.some((tech) => tech.name === item.name),
     discount: item.discount,
-    rating: item.rating,
+    rating: item.rating, // updated here
   })),
   ...interiorItems.map((item) => ({
     name: item.name,
@@ -237,7 +237,7 @@ const products = [
     stock: 50,
     featured: false,
     discount: item.discount,
-    rating: item.rating,
+    rating: item.rating, // updated here
   })),
   ...clothItems.map((item) => ({
     name: item.name,
@@ -248,7 +248,7 @@ const products = [
     stock: 50,
     featured: false,
     discount: item.discount,
-    rating: item.rating,
+    rating: item.rating, // updated here
   })),
 ];
 
@@ -293,6 +293,4 @@ const seedDatabase = async () => {
   }
 };
 
-
-export default  seedDatabase;
-
+export default seedDatabase;
