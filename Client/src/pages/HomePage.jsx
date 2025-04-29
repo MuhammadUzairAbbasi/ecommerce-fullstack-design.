@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Homebanner from "../assets/Home&Outdoor_banner.png";
 import banner from "../assets/banner.png";
 import Consumerbanner from "../assets/Consumer_Electronic_banner.png";
-import CategorySection from "../components/CategorySection.jsx";
+import CategorySection from "../components/HomPageSections/CategorySection.jsx";
 import QuerySection from "../components/HomPageSections/QuerySection";
 import RecommendItems from "../components/HomPageSections/RecommendItems";
 import NewsletterSubscription from "../components/SubscribeNewsletter.jsx";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa6";
 import {
@@ -17,7 +16,8 @@ import {
   services,
   countryData,
 } from "../data/data.js";
-import CountdownTimer from "../components/CountdownTimer.jsx";
+import CountdownTimer from "../components/HomPageSections/CountdownTimer.jsx";
+import { ProductStore } from "../store/ProductStore.js";
 
 // Placeholder images (replace with your actual assets)
 const productImages = {
@@ -27,6 +27,24 @@ const productImages = {
 };
 
 const HomePage = () => {
+  const {
+    DealsProducts,
+    HomeProducts,
+    ConsumerGadetsProducts,
+    featuredProducts,
+    fetchDealProducts,
+    fetchHomeProducts,
+    fetchConsumerGadetsProducts,
+    fetchFeaturedProducts,
+  } = ProductStore();
+
+  useEffect(() => {
+    fetchDealProducts();
+    fetchHomeProducts();
+    fetchConsumerGadetsProducts();
+    fetchFeaturedProducts();
+  }, []);
+
   const [selectedCategory, setSelectedCategory] = useState(
     "/categories/automobiles"
   ); // Default to first item
@@ -53,7 +71,7 @@ const HomePage = () => {
             <ul className="space-y-1 text-sm">
               {categories.map((category) => (
                 <li
-                  key={category.href}
+                  key={category.name}
                   className={`rounded-lg ${
                     selectedCategory === category.href ? "bg-blue-300" : ""
                   }`}
@@ -151,9 +169,10 @@ const HomePage = () => {
           </div>
           {/* Product Grid: Scrollable on Mobile, Grid on Desktop */}
           <div className="flex overflow-x-auto md:grid md:grid-cols-5 md:w-4/5  hide-scrollbar">
-            {techImage.map((product, index) => (
+            {DealsProducts.slice(0, 5).map((product, index) => (
               <Link
-                key={index}
+                key={product._id}
+                to={""}
                 className="bg-white hover:bg-gray-100 p-4 shadow border text-center space-y-1 flex-shrink-0  "
               >
                 <img
@@ -163,7 +182,7 @@ const HomePage = () => {
                 />
                 <h4 className="text-sm font-medium">{product.name}</h4>
                 <p className="inline-block text-red-500 text-sm font-semibold  px-4 bg-red-200 rounded-xl">
-                  -{product.discount}
+                  -{product.discount} %
                 </p>
               </Link>
             ))}
@@ -173,74 +192,75 @@ const HomePage = () => {
         <CategorySection
           title={"Home and Outdoor"}
           bannerImage={Homebanner}
-          products={homeOutdoorItems}
+          products={HomeProducts}
         />
         {/* Consumer Electronics and Gadgets */}
         <CategorySection
           title={"Consumer Electronics and Gadgets"}
           bannerImage={Consumerbanner}
-          products={consumerElectronicsItems}
+          products={ConsumerGadetsProducts}
         />
-      </div>
-      {/* Quote and Query Section */}
-      <QuerySection />
-      {/* Recommend Items */}
-      <RecommendItems />
-      {/* Extra Services Section */}
-      <div className="md:px-14 mb-4">
-        <h2 className="px-4 text-xl md:text-2xl font-semibold text-gray-800 mb-4">
-          Our Extra Services
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
-            >
-              <img
-                src={service.image}
-                alt={service.name}
-                className="w-full h-32 object-cover"
-              />
-              <div className="p-4 flex items-center justify-between">
-                <p className="text-sm text-wrap font-medium text-gray-800">
-                  {service.name}
-                </p>
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 text-blue-600 rounded-full relative flex items-center justify-center bottom-10">
-                  <service.icon color={"black"} className="" />
+        {/* Quote and Query Section */}
+        <QuerySection />
+        {/* Recommend Items */}
+        <RecommendItems data={featuredProducts} />
+        {/* Extra Services Section */}
+        <div className="mb-4">
+          <h2 className="px-4 text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+            Our Extra Services
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-lg shadow-md overflow-hidden"
+              >
+                <img
+                  src={service.image}
+                  alt={service.name}
+                  className="w-full h-32 object-cover"
+                />
+                <div className="p-4 flex items-center justify-between">
+                  <p className="text-sm text-wrap font-medium text-gray-800">
+                    {service.name}
+                  </p>
+                  <div className="flex-shrink-0 w-12 h-12 bg-blue-100 text-blue-600 rounded-full relative flex items-center justify-center bottom-10">
+                    <service.icon color={"black"} className="" />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-      {/* Services Providing Country */}
-      <div className="md:px-14 mb-4">
-        <h2 className="text-xl px-4 md:text-2xl font-semibold text-gray-800 mb-4">
-          Suppliers by Region
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 px-6 md:px-0">
-          {countryData.map((country) => (
-            <div key={country.code} className="flex items-center">
-              <img
-                src={country.flag}
-                alt={`${country.name} flag`}
-                className="w-8 h-6 mr-2 object-cover"
-              />
-              <div>
-                <p className="text-sm font-medium text-gray-800">
-                  {country.name}
-                </p>
-                <p className="text-xs text-gray-500">
-                  shopname.{country.code.toLowerCase()}
-                </p>
+        {/* Services Providing Country */}
+        <div className="">
+          <h2 className="text-xl px-4 md:text-2xl font-semibold text-gray-800 mb-4">
+            Suppliers by Region
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 px-6 md:px-0">
+            {countryData.map((country) => (
+              <div key={country.code} className="flex items-center">
+                <img
+                  src={country.flag}
+                  alt={`${country.name} flag`}
+                  className="w-8 h-6 mr-2 object-cover"
+                />
+                <div>
+                  <p className="text-sm font-medium text-gray-800">
+                    {country.name}
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    shopname.{country.code.toLowerCase()}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+        {/* newsletter Section */}
+        <NewsletterSubscription />
       </div>
-      {/* newsletter Section */}
-      <NewsletterSubscription />
+
       {/* Footer */}
       <Footer />
     </div>

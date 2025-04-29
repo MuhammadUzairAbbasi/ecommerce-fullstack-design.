@@ -27,7 +27,7 @@ const QuerySection = () => {
   };
 
   return (
-    <div className="md:px-14 md:py-1 py-3">
+    <div>
       <div
         className="flex md:p-8 "
         style={{

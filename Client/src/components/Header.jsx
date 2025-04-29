@@ -77,7 +77,7 @@ const Header = () => {
                 {searchCategories.map((item, index) => (
                   <>
                     <option
-                      key={index}
+                      key={item.label}
                       value="All Category"
                       onClick={() => setLocalSelectCategory(item.label)}
                     >
@@ -166,14 +166,10 @@ const Header = () => {
               <IoMenu size={30} />
             </button>
 
-            <div className="flex flex-row space-x-3 justify-center items-center font-semibold ">
+            <div className="flex overflow-x-auto md:overflow-visible [scrollbar-width:none] space-x-3 justify-center items-center font-semibold ">
               {navCategories.map((item, index) => (
                 <>
-                  <Link
-                    key={index}
-                    to={item.path}
-                    className="sm:text-nowrap sm:overflow-x-auto sm:flex-nowrap overflow-hidden md:overflow-visible md:flex-wrap no-scrollbar scroll-smooth"
-                  >
+                  <Link key={item.label} to={item.path} className="text-nowrap">
                     {item.label}
                   </Link>
                 </>

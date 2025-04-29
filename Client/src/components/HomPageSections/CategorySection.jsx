@@ -27,9 +27,9 @@ const CategorySection = ({ title, bannerImage, products }) => {
 
       {/* Product Grid */}
       <div className="flex overflow-x-auto md:grid md:grid-cols-4 w-full">
-        {products.map((product, index) => (
+        {products.slice(0, 8).map((product, index) => (
           <Link
-            key={index}
+            key={product._id}
             to={`/products/${product._id}`} // Assuming each product has an _id for routing
             className="flex flex-col-reverse md:flex-row md:items-start justify-between bg-white p-4 hover:bg-gray-100 text-center border"
           >
@@ -60,6 +60,3 @@ const CategorySection = ({ title, bannerImage, products }) => {
 };
 
 export default CategorySection;
-
-
-
