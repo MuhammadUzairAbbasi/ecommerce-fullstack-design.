@@ -3,6 +3,8 @@ import { axiosInstance } from "../lib/axios.js";
 
 export const ProductStore = create((set, get) => ({
   products: [],
+  productwithId: null,
+  productsbyCategory: [],
   DealsProducts: [],
   SelectedCondition: [],
   featuredProducts: [],
@@ -36,9 +38,6 @@ export const ProductStore = create((set, get) => ({
       if (selectCategory) params.category = selectCategory;
 
       const response = await axiosInstance.get("/getAllProducts", { params });
-      // if (!response.ok) {
-      //   throw new Error("Network response was not ok");
-      // }
 
       console.log("Fetched products:", response.data);
       set({ products: response.data });
@@ -51,15 +50,27 @@ export const ProductStore = create((set, get) => ({
   fetchProductbyCategory: async (category) => {
     set({ loading: true, error: null });
     try {
-      const response = await axiosInstance.get("/getProductsbyCategory", {
-        params: { category },
-      });
+      const response = await axiosInstance.get(
+        `/getProductsbyCategory/${category}`
+      );
       console.log("Fetched products by category:", response.data);
-      set({ products: response.data });
+      set({ productsbyCategory: response.data });
     } catch (error) {
       set({ error: error.message });
     } finally {
       set({ loading: false });
+    }
+  },
+  fetchProductbyId: async (id) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await axiosInstance.get(`/getProductsbyId/${id}`);
+      console.log("Product ID : ", id);
+      set({ productwithId: response.data });
+      console.log("Fetched product by ID:", response.data);
+    } catch (error) {
+      console.log("Error fetching product by ID:", error);
+      set({ error: error.message });
     }
   },
   fetchDealProducts: async () => {
@@ -142,14 +153,14 @@ export const ProductStore = create((set, get) => ({
 
 //   // Conditions-specific state and methods (as provided)
 //   ConditionsSelected: [],
-  // addCondition: (condition) =>
-  //   set((state) => ({
-  //     ConditionsSelected: [...state.ConditionsSelected, condition],
-  //   })),
-  // removeCondition: (condition) =>
-  //   set((state) => ({
-  //     ConditionsSelected: state.ConditionsSelected.filter(
-  //       (c) => c !== condition
-  //     ),
-  //   })),
+// addCondition: (condition) =>
+//   set((state) => ({
+//     ConditionsSelected: [...state.ConditionsSelected, condition],
+//   })),
+// removeCondition: (condition) =>
+//   set((state) => ({
+//     ConditionsSelected: state.ConditionsSelected.filter(
+//       (c) => c !== condition
+//     ),
+//   })),
 // }));

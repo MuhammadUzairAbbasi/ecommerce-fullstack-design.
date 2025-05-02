@@ -12,71 +12,82 @@ const navCategories = [
   { value: "project-menu", label: "Project Menu Items", path: "/project-menu" },
 ];
 
+import AE from "../assets/flags/AE.png";
+import AU from "../assets/flags/AU.png";
+import CN from "../assets/flags/CN.png";
+import DE from "../assets/flags/DE.png";
+import DK from "../assets/flags/DK.png";
+import FR from "../assets/flags/FR.png";
+import GB from "../assets/flags/GB.png";
+import IT from "../assets/flags/IT.png";
+import RU from "../assets/flags/RU.png";
+import US from "../assets/flags/US.png";
+
 const countryFlags = [
   {
     code: "US",
     name: "United States",
-    flag: "http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg",
+    flag: { AE },
     emoji: "🇺🇸",
   },
   {
     code: "GB",
     name: "United Kingdom",
-    flag: "http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg",
+    flag: { AE },
     emoji: "🇬🇧",
   },
   {
     code: "CA",
     name: "Canada",
-    flag: "http://purecatamphetamine.github.io/country-flag-icons/3x2/CA.svg",
+    flag: { AE },
     emoji: "🇨🇦",
   },
   {
     code: "AU",
     name: "Australia",
-    flag: "http://purecatamphetamine.github.io/country-flag-icons/3x2/AU.svg",
+    flag: { AE },
     emoji: "🇦🇺",
   },
   {
     code: "IN",
     name: "India",
-    flag: "http://purecatamphetamine.github.io/country-flag-icons/3x2/IN.svg",
+    flag: { AE },
     emoji: "🇮🇳",
   },
   {
     code: "PK",
     name: "Pakistan",
-    flag: "http://purecatamphetamine.github.io/country-flag-icons/3x2/PK.svg",
+    flag: { AE },
     emoji: "🇵🇰",
   },
   {
     code: "FR",
     name: "France",
-    flag: "http://purecatamphetamine.github.io/country-flag-icons/3x2/FR.svg",
+    flag: { AE },
     emoji: "🇫🇷",
   },
   {
     code: "DE",
     name: "Germany",
-    flag: "http://purecatamphetamine.github.io/country-flag-icons/3x2/DE.svg",
+    flag: { AE },
     emoji: "🇩🇪",
   },
   {
     code: "JP",
     name: "Japan",
-    flag: "http://purecatamphetamine.github.io/country-flag-icons/3x2/JP.svg",
+    flag: { AE },
     emoji: "🇯🇵",
   },
   {
     code: "CN",
     name: "China",
-    flag: "http://purecatamphetamine.github.io/country-flag-icons/3x2/CN.svg",
+    flag: { CN },
     emoji: "🇨🇳",
   },
   {
     code: "BR",
     name: "Brazil",
-    flag: "http://purecatamphetamine.github.io/country-flag-icons/3x2/BR.svg",
+    flag: { AE },
     emoji: "🇧🇷",
   },
 ];
@@ -173,17 +184,6 @@ const services = [
     icon: FaShieldAlt,
   },
 ];
-
-import AE from "../assets/flags/AE.png";
-import AU from "../assets/flags/AU.png";
-import CN from "../assets/flags/CN.png";
-import DE from "../assets/flags/DE.png";
-import DK from "../assets/flags/DK.png";
-import FR from "../assets/flags/FR.png";
-import GB from "../assets/flags/GB.png";
-import IT from "../assets/flags/IT.png";
-import RU from "../assets/flags/RU.png";
-import US from "../assets/flags/US.png";
 
 const countryData = [
   { code: "AE", name: "Arab Emirates", web: "shopname.ae", flag: AE },

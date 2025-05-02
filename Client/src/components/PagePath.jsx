@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
 
 const PagePath = () => {
   return (
-    <nav className="hidden md:flex items-center text-sm text-gray-500">
+    <nav className="hidden md:flex items-center text-sm mt-2 text-gray-500">
       <span className="flex items-center">
         <Link to="/" className="hover:text-blue-600">
           Home
@@ -27,6 +27,6 @@ const PagePath = () => {
       </span>
     </nav>
   );
-}
+};
 
-export default PagePath
+export default PagePath;

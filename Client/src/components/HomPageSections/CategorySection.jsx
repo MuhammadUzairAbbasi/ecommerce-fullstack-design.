@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Loader from "../Loader";
 
 const CategorySection = ({ title, bannerImage, products }) => {
   return (
@@ -30,7 +31,7 @@ const CategorySection = ({ title, bannerImage, products }) => {
         {products.slice(0, 8).map((product, index) => (
           <Link
             key={product._id}
-            to={`/products/${product._id}`} // Assuming each product has an _id for routing
+            to={`/ProductDetail/${product._id}`} // Assuming each product has an _id for routing
             className="flex flex-col-reverse md:flex-row md:items-start justify-between bg-white p-4 hover:bg-gray-100 text-center border"
           >
             <div className="flex flex-col">

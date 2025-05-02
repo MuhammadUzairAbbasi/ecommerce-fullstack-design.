@@ -18,6 +18,7 @@ import {
 } from "../data/data.js";
 import CountdownTimer from "../components/HomPageSections/CountdownTimer.jsx";
 import { ProductStore } from "../store/ProductStore.js";
+import Loader from "../components/Loader.jsx";
 
 // Placeholder images (replace with your actual assets)
 const productImages = {
@@ -169,23 +170,27 @@ const HomePage = () => {
           </div>
           {/* Product Grid: Scrollable on Mobile, Grid on Desktop */}
           <div className="flex overflow-x-auto md:grid md:grid-cols-5 md:w-4/5  hide-scrollbar">
-            {DealsProducts.slice(0, 5).map((product, index) => (
-              <Link
-                key={product._id}
-                to={""}
-                className="bg-white hover:bg-gray-100 p-4 shadow border text-center space-y-1 flex-shrink-0  "
-              >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-24 md:h-32 object-contain mb-2"
-                />
-                <h4 className="text-sm font-medium">{product.name}</h4>
-                <p className="inline-block text-red-500 text-sm font-semibold  px-4 bg-red-200 rounded-xl">
-                  -{product.discount} %
-                </p>
-              </Link>
-            ))}
+            {DealsProducts.length < 0 ? (
+              <Loader />
+            ) : (
+              DealsProducts.slice(0, 5).map((product, index) => (
+                <Link
+                  key={product._id}
+                  to={"/ProductDetail/" + product._id}
+                  className="bg-white hover:bg-gray-100 p-4 shadow border text-center space-y-1 flex-shrink-0  "
+                >
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-24 md:h-32 object-contain mb-2"
+                  />
+                  <h4 className="text-sm font-medium">{product.name}</h4>
+                  <p className="inline-block text-red-500 text-sm font-semibold  px-4 bg-red-200 rounded-xl">
+                    -{product.discount} %
+                  </p>
+                </Link>
+              ))
+            )}
           </div>
         </div>
 
