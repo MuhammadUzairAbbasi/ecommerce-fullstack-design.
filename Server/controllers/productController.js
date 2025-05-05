@@ -1,8 +1,6 @@
 import Product from "../models/Product.js";
 import Inquiry from "../models/Inquiry.js";
 import Subscriber from "../models/Subscriber.js";
-import cloudinary from "../config/cloudinary.js";
-import { set } from "mongoose";
 
 const getAllProducts = async (req, res) => {
   try {

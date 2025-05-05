@@ -16,16 +16,22 @@ const Login = () => {
       toast.error("All fields are required");
       return;
     }
-    const success = await Login({ email, password });
-    if (success) {
-      if (user && user.role === "user") {
-        navigate("/");
-      } else if (user && user.role === "admin") {
-        navigate("/admin");
+    try {
+      const success = await Login({ email, password });
+      if (success) {
+        const user = AuthStore.getState().user; // Get the latest user state
+        if (user?.role === "user") {
+          navigate("/");
+        } else if (user?.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/login");
+        }
       } else {
-        navigate("/login");
+        toast.error(errorMsg);
       }
-      // Redirect to home or dashboard after successful login
+    } catch (error) {
+      toast.error("An unexpected error occurred. Please try again.");
     }
   };
 

@@ -150,7 +150,9 @@ export const ProductStore = create((set, get) => ({
         userId,
         productId,
       });
+
       if (response && response.data) {
+        await get().fetchCartProducts(userId);
         toast.success(response.data.message || "Product added to cart");
       }
       return true;
@@ -171,6 +173,7 @@ export const ProductStore = create((set, get) => ({
         productId,
       });
       if (response && response.data) {
+        await get().fetchFavouritesProducts(userId);
         toast.success(response.data.message || "Product added to Favourites");
       }
       return true;

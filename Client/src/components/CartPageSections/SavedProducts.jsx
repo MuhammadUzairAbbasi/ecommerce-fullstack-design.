@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { AuthStore } from "../../store/AuthStore";
 import { ProductStore } from "../../store/ProductStore";
+import Loader from "../Loader";
 import { FaCartPlus } from "react-icons/fa"; // For the cart icon
 
 const SavedProducts = () => {
@@ -8,6 +9,7 @@ const SavedProducts = () => {
   const {
     LoadingFavourites,
     favouriteProducts,
+    addtoFavourites,
     fetchFavouritesProducts,
     removeFromFavourites,
     addtoCart,
@@ -20,7 +22,7 @@ const SavedProducts = () => {
   }, [user?.id, fetchFavouritesProducts]);
 
   if (LoadingFavourites) {
-    return <div>Saved Product Loading...</div>;
+    return <div className="flex items-center justify-center p-3"><Loader /></div>
   }
 
   const handleMoveToCart = (productId) => {

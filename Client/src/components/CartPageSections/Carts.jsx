@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { ProductStore } from "../../store/ProductStore";
 import { AuthStore } from "../../store/AuthStore";
-import Loader from "../Loader";
 import { EllipsisVertical, Plus, Minus } from "lucide-react";
+import Loader from "../Loader";
 import { Link } from "react-router-dom"; // For "Back to shop" navigation
-import OurServices from "./OurServices";
 
 const Carts = () => {
-  const [update, setUpdate] = useState(false);
   const {
+    addtoCart,
     cartProducts,
     fetchCartProducts,
     LoadingCarts,
     addtoFavourites,
     removeFromCart,
+    fetchFavouritesProducts,
   } = ProductStore();
   const { user } = AuthStore();
   const [menuVisible, setMenuVisible] = useState(null); // Track which product's menu is visible
@@ -25,25 +25,29 @@ const Carts = () => {
       console.log("User ID:", user.id);
       fetchCartProducts(user.id);
     }
-  }, [user?.id, fetchCartProducts, update]);
+  }, [user?.id, fetchCartProducts]);
 
   console.log("Cart Products:", cartProducts);
 
-  if (LoadingCarts) return <div>Loading cart products...</div>;
+  if (LoadingCarts)
+    return (
+      <div className="flex items-center justify-center p-3">
+        <Loader />
+      </div>
+    );
 
   const toggleMenu = (index) => {
     setMenuVisible(menuVisible === index ? null : index);
   };
 
   const handleDelete = (productId) => {
-    setUpdate(!update);
     removeFromCart(productId);
     setMenuVisible(null);
   };
 
   const handleSaveForLater = (productId) => {
-    setUpdate(!update);
     addtoFavourites(user.id, productId);
+    fetchFavouritesProducts(user.id);
     setMenuVisible(null);
   };
 

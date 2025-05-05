@@ -35,9 +35,6 @@ app.use(
   })
 );
 
-// Middleware to handle preflight requests explicitly
-// app.options("*", cors()); // Handle preflight for all routes
-
 app.use(express.json());
 app.use(fileUpload());
 

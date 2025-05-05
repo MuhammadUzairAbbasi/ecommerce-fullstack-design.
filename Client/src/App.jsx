@@ -23,10 +23,28 @@ function App() {
     <>
       {!hideHeader && <Header />}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/"
+          element={
+            user && user.role === "user" ? (
+              <HomePage />
+            ) : (
+              <Navigate to={"/login"} />
+            )
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route
+          path="/admin"
+          element={
+            user && user.role === "admin" ? (
+              <AdminDashboard />
+            ) : (
+              <Navigate to={"/login"} />
+            )
+          }
+        />
         <Route
           path="/ProductsList"
           element={user ? <ProductListing /> : <Navigate to={"/login"} />}

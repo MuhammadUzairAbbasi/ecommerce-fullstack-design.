@@ -120,7 +120,7 @@ const Header = () => {
       <div className="container mx-auto px-3 space-y-3">
         <div className="flex items-center justify-between h-full">
           {/* Brand Logo Section */}
-          <div className="flex items-center space-x-2">
+          <Link to={"/"} className="flex items-center space-x-2">
             <button
               className="block md:hidden"
               aria-label="Toggle Navigation Menu"
@@ -132,7 +132,7 @@ const Header = () => {
             </button>
             <img src={logo} alt="E Commerce Platform logo" />
             <h1 className="font-bold text-xl text-blue-500">Brand</h1>
-          </div>
+          </Link>
           {/* Search And Category */}
           <div className="hidden lg:flex items-center space-x-2">
             <form
