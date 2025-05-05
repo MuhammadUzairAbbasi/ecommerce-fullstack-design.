@@ -20,18 +20,10 @@ const frontendUrl = process.env.FRONTEND_URL?.replace(/\/+$/, "");
 // CORS configuration
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Allow requests from the frontend or during development (e.g., localhost)
-      const allowedOrigins = [frontendUrl, "http://localhost:5173"];
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // Allow cookies/credentials
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Explicitly allow methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
+    origin: "*",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
