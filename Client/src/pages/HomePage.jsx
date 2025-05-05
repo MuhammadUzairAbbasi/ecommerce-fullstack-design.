@@ -9,6 +9,7 @@ import RecommendItems from "../components/HomPageSections/RecommendItems";
 import NewsletterSubscription from "../components/SubscribeNewsletter.jsx";
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa6";
+
 import {
   techImage,
   homeOutdoorItems,
@@ -18,6 +19,7 @@ import {
 } from "../data/data.js";
 import CountdownTimer from "../components/HomPageSections/CountdownTimer.jsx";
 import { ProductStore } from "../store/ProductStore.js";
+import { AuthStore } from "../store/AuthStore.js";
 import Loader from "../components/Loader.jsx";
 
 // Placeholder images (replace with your actual assets)
@@ -29,6 +31,8 @@ const productImages = {
 
 const HomePage = () => {
   const {
+    products,
+    fetchProducts,
     DealsProducts,
     HomeProducts,
     ConsumerGadetsProducts,
@@ -38,13 +42,14 @@ const HomePage = () => {
     fetchConsumerGadetsProducts,
     fetchFeaturedProducts,
   } = ProductStore();
+  const { user } = AuthStore();
 
   useEffect(() => {
     fetchDealProducts();
     fetchHomeProducts();
     fetchConsumerGadetsProducts();
     fetchFeaturedProducts();
-  }, []);
+  }, [fetchProducts]);
 
   const [selectedCategory, setSelectedCategory] = useState(
     "/categories/automobiles"
@@ -127,22 +132,34 @@ const HomePage = () => {
                   className="bg-blue-200 h-12 w-12 p-1 rounded-full"
                 />
                 <span className="font-semibold text-md text-gray-800">
-                  <p>Hi, user</p> <p>let's get started</p>
+                  <p>Hi, {user ? user.name : "User"}</p>{" "}
+                  <p>let's get started</p>
                 </span>
               </div>
 
-              <Link
-                to="/join"
-                className="block bg-blue-500 text-white text-center py-2 rounded mb-2 hover:bg-blue-600"
-              >
-                Join now
-              </Link>
-              <Link
-                to="/login"
-                className="block bg-gray-100 text-gray-800 text-center py-2 rounded hover:bg-gray-200"
-              >
-                Log in
-              </Link>
+              {!user ? (
+                <>
+                  <Link
+                    to="/join"
+                    className="block bg-blue-500 text-white text-center py-2 rounded mb-2 hover:bg-blue-600"
+                  >
+                    Join now
+                  </Link>
+                  <Link
+                    to="/login"
+                    className="block bg-gray-100 text-gray-800 text-center py-2 rounded hover:bg-gray-200"
+                  >
+                    Log in
+                  </Link>
+                </>
+              ) : (
+                <Link
+                  to="/login"
+                  className="block bg-blue-500 text-white text-center py-2 rounded hover:bg-blue-600"
+                >
+                  Log Out
+                </Link>
+              )}
             </div>
 
             <div className="bg-orange-500 p-4 rounded-lg shadow">

@@ -6,10 +6,10 @@ const searchCategories = [
 ];
 
 const navCategories = [
-  { value: "all", label: "All Categories", path: "/products" },
-  { value: "hot-offers", label: "Hot Offers", path: "/hot-offers" },
-  { value: "gift-boxes", label: "Gift Boxes", path: "/gift-boxes" },
-  { value: "project-menu", label: "Project Menu Items", path: "/project-menu" },
+  { value: "all", label: "All Categories", path: "/ProductsList" },
+  { value: "hot-offers", label: "Hot Offers", path: "/ProductsList" },
+  { value: "gift-boxes", label: "Gift Boxes", path: "/ProductsList" },
+  { value: "project-menu", label: "Project Menu Items", path: "/ProductsList" },
 ];
 
 import AE from "../assets/flags/AE.png";

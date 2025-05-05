@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ProductStore } from "../../store/ProductStore";
+import { AuthStore } from "../../store/AuthStore";
 import { MdOutlineMessage } from "react-icons/md";
 import { MdShoppingBasket } from "react-icons/md";
 import { GoDotFill } from "react-icons/go";
@@ -11,6 +12,12 @@ import Loader from "../Loader";
 
 const DetailsSection = ({ product }) => {
   const [fulldescription, setfulldescription] = useState(false);
+  const { user } = AuthStore();
+  const { addtoCart, addtoFavourites } = ProductStore();
+
+  useEffect(() => {
+    console.log("User : ", user);
+  }, []);
 
   if (!product) {
     return (
@@ -114,10 +121,20 @@ const DetailsSection = ({ product }) => {
         </div>
 
         <div className="md:hidden flex items-center justify-center w-full space-x-2 mb-2">
-          <button className="bg-blue-500 text-white w-[90%] rounded-lg py-2 hover:bg-blue-700 font-semibold">
+          <button
+            onClick={() => {
+              addtoCart(user.id, product._id);
+            }}
+            className="bg-blue-500 text-white w-[90%] rounded-lg py-2 hover:bg-blue-700 font-semibold"
+          >
             Send Inquiry
           </button>
-          <button className="shadow-lg text-blue-500 rounded-lg p-2">
+          <button
+            onClick={() => {
+              addtoFavourites(user.id, product._id);
+            }}
+            className="shadow-lg text-blue-500 rounded-lg p-2"
+          >
             <CiHeart className="w-7 h-7" />
           </button>
         </div>
@@ -222,7 +239,12 @@ const DetailsSection = ({ product }) => {
             </div>
           </div>
           <div className="hidden md:flex flex-col items-center justify-center w-full space-y-2">
-            <button className="bg-blue-500 text-white w-[95%] rounded-lg py-2 hover:bg-blue-700 font-semibold">
+            <button
+              onClick={() => {
+                addtoCart(user.id, product._id);
+              }}
+              className="bg-blue-500 text-white w-[95%] rounded-lg py-2 hover:bg-blue-700 font-semibold"
+            >
               Send Inquiry
             </button>
             <button className="text-blue-600 border-2 w-[95%] rounded-lg py-2 border-blue-500 hover:border-blue-700 font-semibold">
@@ -232,11 +254,16 @@ const DetailsSection = ({ product }) => {
         </div>
 
         <div className="hidden md:block w-full bg-gray-300 h-px"></div>
-        <div className="hidden md:flex items-center justify-center text-blue-500 space-x-3 mt-4">
-          <button>
+        <div className="hidden md:flex items-center justify-center text-blue-500 hover:text-blue-700 space-x-3 mt-4">
+          <button
+            className="flex space-x-2"
+            onClick={() => {
+              addtoFavourites(user.id, product._id);
+            }}
+          >
             <CiHeart className="w-7 h-7" />
+            <span className="text-md font-semibold">Save for Later</span>
           </button>
-          <button className="text-md font-semibold">Save for Later</button>
         </div>
       </div>
     </div>
