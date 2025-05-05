@@ -37,23 +37,16 @@ export const ProductStore = create((set, get) => ({
     })),
 
   fetchProducts: async () => {
-    const { searchText, selectCategory } = get();
     set({ loading: true, error: null });
     try {
-      // Build query parameters
-      const params = {};
-      if (searchText) params.search = searchText;
-      if (selectCategory) params.category = selectCategory;
-
-      const response = await axiosInstance.get("/products/getAllProducts", {
-        params,
-      });
-
-      console.log("Fetched products:", response.data);
-      set({ products: response.data });
+      const response = await axiosInstance.get("/products/getAllProducts");
+      if (response && response.data) {
+        set({ products: response.data });
+      } else {
+        throw new Error("No data received from server");
+      }
     } catch (error) {
-      toast.info(error.response.data.message);
-      set({ error: error.message });
+      set({ error: error.message || "Failed to fetch products" });
     } finally {
       set({ loading: false });
     }
@@ -64,8 +57,10 @@ export const ProductStore = create((set, get) => ({
       const response = await axiosInstance.get(
         `/products/getProductsbyCategory/${category}`
       );
-      console.log("Fetched products by category:", response.data);
-      set({ productsbyCategory: response.data });
+      // console.log("Fetched products by category:", response.data);
+      if (response && response.data) {
+        set({ productsbyCategory: response.data });
+      }
     } catch (error) {
       set({ error: error.message });
     } finally {
@@ -78,8 +73,10 @@ export const ProductStore = create((set, get) => ({
       const response = await axiosInstance.get(
         `/products/getProductsbyId/${id}`
       );
-      console.log("Product ID : ", id);
-      set({ productwithId: response.data });
+      // console.log("Product ID : ", id);
+      if (response && response.data) {
+        set({ productwithId: response.data });
+      }
       console.log("Fetched product by ID:", response.data);
     } catch (error) {
       console.log("Error fetching product by ID:", error);
@@ -90,8 +87,10 @@ export const ProductStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       const response = await axiosInstance.get("/products/getDealProducts");
-      console.log("Fetched deal products:", response.data);
-      set({ DealsProducts: response.data });
+      // console.log("Fetched deal products:", response.data);
+      if (response && response.data) {
+        set({ DealsProducts: response.data });
+      }
     } catch (error) {
       set({ error: error.message });
     } finally {
@@ -102,8 +101,10 @@ export const ProductStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       const response = await axiosInstance.get("/products/getHomeProducts");
-      console.log("Fetched home products:", response.data);
-      set({ HomeProducts: response.data });
+      // console.log("Fetched home products:", response.data);
+      if (response && response.data) {
+        set({ HomeProducts: response.data });
+      }
     } catch (error) {
       set({ error: error.message });
     } finally {
@@ -116,8 +117,10 @@ export const ProductStore = create((set, get) => ({
       const response = await axiosInstance.get(
         "/products/getConsumerGadetsProducts"
       );
-      console.log("Fetched consumer gadgets products:", response.data);
-      set({ ConsumerGadetsProducts: response.data });
+      // console.log("Fetched consumer gadgets products:", response.data);
+      if (response && response.data) {
+        set({ ConsumerGadetsProducts: response.data });
+      }
     } catch (error) {
       set({ error: error.message });
     } finally {
@@ -128,8 +131,10 @@ export const ProductStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       const response = await axiosInstance.get("/products/featuredProducts");
-      console.log("Fetched featured products:", response.data);
-      set({ featuredProducts: response.data });
+      // console.log("Fetched featured products:", response.data);
+      if (response && response.data) {
+        set({ featuredProducts: response.data });
+      }
     } catch (error) {
       set({ error: error.message });
     } finally {
@@ -139,13 +144,15 @@ export const ProductStore = create((set, get) => ({
   addtoCart: async (userId, productId) => {
     set({ addingtoCart: true });
     try {
-      console.log("UserId: ", userId, " ProductId: ", productId);
+      // console.log("UserId: ", userId, " ProductId: ", productId);
 
       const response = await axiosInstance.post("/user/addtoCart", {
         userId,
         productId,
       });
-      toast.success(response.data.message || "Product added to cart");
+      if (response && response.data) {
+        toast.success(response.data.message || "Product added to cart");
+      }
       return true;
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to add to cart");
@@ -157,13 +164,15 @@ export const ProductStore = create((set, get) => ({
   addtoFavourites: async (userId, productId) => {
     set({ addtoFavourite: true });
     try {
-      console.log("UserId: ", userId, " ProductId: ", productId);
+      // console.log("UserId: ", userId, " ProductId: ", productId);
 
       const response = await axiosInstance.post("/user/addtoFavourites", {
         userId,
         productId,
       });
-      toast.success(response.data.message || "Product added to Favourites");
+      if (response && response.data) {
+        toast.success(response.data.message || "Product added to Favourites");
+      }
       return true;
     } catch (error) {
       toast.error(
@@ -190,10 +199,11 @@ export const ProductStore = create((set, get) => ({
       });
 
       // console.log("cart products : ", response.data);
-
-      set({
-        cartProducts: response.data.cart || [],
-      });
+      if (response && response.data) {
+        set({
+          cartProducts: response.data.cart || [],
+        });
+      }
       return true;
     } catch (error) {
       console.log(
@@ -221,9 +231,11 @@ export const ProductStore = create((set, get) => ({
         },
       });
 
-      set({
-        favouriteProducts: response.data.Fav_Prod || [],
-      });
+      if (response && response.data) {
+        set({
+          favouriteProducts: response.data.Fav_Prod || [],
+        });
+      }
       return true;
     } catch (error) {
       console.log(
@@ -249,9 +261,11 @@ export const ProductStore = create((set, get) => ({
         },
       });
 
-      set({
-        cartProducts: response.data.cart || [],
-      });
+      if (response && response.data) {
+        set({
+          cartProducts: response.data.cart || [],
+        });
+      }
       return true;
     } catch (error) {
       console.log(
@@ -280,9 +294,11 @@ export const ProductStore = create((set, get) => ({
         }
       );
 
-      set({
-        favouriteProducts: response.data.favorites || [],
-      });
+      if (response && response.data) {
+        set({
+          favouriteProducts: response.data.favorites || [],
+        });
+      }
       return true;
     } catch (error) {
       console.log(
@@ -303,8 +319,10 @@ export const ProductStore = create((set, get) => ({
           "Content-Type": "multipart/form-data",
         },
       });
-      toast.success("Product Added Successfully");
-      set((state) => ({ products: [...state.products, response.data] }));
+      if (response && response.data) {
+        toast.success("Product Added Successfully");
+        set((state) => ({ products: [...state.products, response.data] }));
+      }
     } catch (error) {
       console.error(
         "Add Product Error:",
@@ -319,10 +337,12 @@ export const ProductStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       await axiosInstance.delete(`/admin/delete/${productId}`);
-      toast.success("Product Deleted Succesfully");
-      set((state) => ({
-        products: state.products.filter((p) => p._id !== productId),
-      }));
+      if (response && response.data) {
+        toast.success("Product Deleted Succesfully");
+        set((state) => ({
+          products: state.products.filter((p) => p._id !== productId),
+        }));
+      }
     } catch (error) {
       console.error(
         "Delete Product Error:",

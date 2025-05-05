@@ -1,8 +1,6 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://ecommerce-fullstack-backend-jet.vercel.app/api",
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000/api",
   withCredentials: true,
 });
-
-// withCredentials : true for sending cookies with api
