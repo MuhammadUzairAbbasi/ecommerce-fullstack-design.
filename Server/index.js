@@ -19,7 +19,8 @@ app.use(fileUpload());
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Frontend URL
+    origin: "https://brand-ecommerce-service.vercel.app/",
+    // origin: "http://localhost:5173",
     credentials: true,
   })
 );
