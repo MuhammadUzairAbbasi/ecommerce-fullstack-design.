@@ -36,7 +36,7 @@ app.use(
 );
 
 // Middleware to handle preflight requests explicitly
-app.options("*", cors()); // Handle preflight for all routes
+// app.options("*", cors()); // Handle preflight for all routes
 
 app.use(express.json());
 app.use(fileUpload());
@@ -47,4 +47,7 @@ app.use("/api/auth", AuthRoutes);
 app.use("/api/user", UserRoutes);
 app.use("/api/admin", AdminRoutes);
 
+// app.listen(port, () => {
+//   console.log(`Server Running on port ${port}`);
+// });
 export default app;
