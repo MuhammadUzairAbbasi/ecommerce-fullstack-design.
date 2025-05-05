@@ -337,12 +337,10 @@ export const ProductStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       await axiosInstance.delete(`/admin/delete/${productId}`);
-      if (response && response.data) {
-        toast.success("Product Deleted Succesfully");
-        set((state) => ({
-          products: state.products.filter((p) => p._id !== productId),
-        }));
-      }
+      toast.success("Product Deleted Succesfully");
+      set((state) => ({
+        products: state.products.filter((p) => p._id !== productId),
+      }));
     } catch (error) {
       console.error(
         "Delete Product Error:",
