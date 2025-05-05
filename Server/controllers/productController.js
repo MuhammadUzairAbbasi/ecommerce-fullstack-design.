@@ -59,7 +59,6 @@ const getProductbyCategory = async (req, res) => {
   }
 };
 
-
 const featuredProducts = async (req, res) => {
   try {
     const featuredProducts = await Product.find({ featured: true });
