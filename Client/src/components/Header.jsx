@@ -9,7 +9,7 @@ import { IoMenu } from "react-icons/io5";
 import { searchCategories, navCategories, countryFlags } from "../data/data";
 import { GoSearch } from "react-icons/go";
 import { ProductStore } from "../store/ProductStore";
-import MblSidebar from "./mblSidebar";
+import MblSidebar from "./MblSidebar";
 import Select from "react-select";
 import {
   US,
