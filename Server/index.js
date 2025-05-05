@@ -35,3 +35,4 @@ app.use("/api/admin", AdminRoutes);
 
 //   // seedDatabase();
 // });
+export default app;
