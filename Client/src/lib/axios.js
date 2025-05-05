@@ -1,8 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: " https://ecommerce-fullstack-design-backend-two.vercel.app/api",
-  // baseURL: "http://localhost:5000/api",
+  baseURL: "https://ecommerce-fullstack-backend-jet.vercel.app/api",
   withCredentials: true,
 });
 
