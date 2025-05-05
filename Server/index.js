@@ -17,13 +17,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(fileUpload());
 
-app.use(
-  cors({
-    origin: "https://brand-ecommerce-service.vercel.app/",
-    // origin: "http://localhost:5173",
-    credentials: true,
-  })
-);
+app.use(cors());
 dbconnection();
 
 app.use("/api/products", productRoutes);
