@@ -10,6 +10,8 @@ import CartPage from "./pages/CartPage";
 import { AuthStore } from "./store/AuthStore";
 import AdminDashboard from "./pages/AdminDashboard";
 
+// New Application
+
 function App() {
   const { user } = AuthStore();
   const location = useLocation();
