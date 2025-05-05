@@ -8,6 +8,7 @@ import UserRoutes from "./routes/UserRoutes.js";
 import AdminRoutes from "./routes/AdminRoutes.js";
 import fileUpload from "express-fileupload";
 
+dbconnection();
 dotenv.config();
 
 const app = express();
