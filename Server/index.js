@@ -35,6 +35,10 @@ app.use("/api/products", productRoutes);
 app.use("/api/auth", AuthRoutes);
 app.use("/api/user", UserRoutes);
 app.use("/api/admin", AdminRoutes);
+app.use('/',()=>{
+  console.log('Chal gaya');
+  
+})
 
 // app.listen(port, () => {
 //   console.log(`Server Running on port ${port}`);
