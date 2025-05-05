@@ -18,9 +18,9 @@ const Login = () => {
     }
     const success = await Login({ email, password });
     if (success) {
-      if (user.role == "user") {
+      if (user && user.role == "user") {
         navigate("/");
-      } else if (user.role == "admin") {
+      } else if (user && user.role == "admin") {
         navigate("/admin");
       } else {
         navigate("/login");
