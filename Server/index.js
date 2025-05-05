@@ -23,14 +23,15 @@ app.use(
     credentials: true,
   })
 );
+dbconnection();
 
 app.use("/api/products", productRoutes);
 app.use("/api/auth", AuthRoutes);
 app.use("/api/user", UserRoutes);
 app.use("/api/admin", AdminRoutes);
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-  dbconnection();
-  // seedDatabase();
-});
+// app.listen(port, () => {
+//   console.log(`Server running on port ${port}`);
+
+//   // seedDatabase();
+// });
