@@ -1,4 +1,3 @@
-
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -8,7 +7,6 @@ import AuthRoutes from "../routes/AuthRoutes.js";
 import UserRoutes from "../routes/UserRoutes.js";
 import AdminRoutes from "../routes/AdminRoutes.js";
 import fileUpload from "express-fileupload";
-import serverless from "serverless-http";
 
 // Load environment variables
 dotenv.config();
@@ -43,4 +41,4 @@ app.use("/api/admin", AdminRoutes);
 
 await dbconnection();
 
-export const handler = serverless(app);
+export default app;
