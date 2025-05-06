@@ -2,10 +2,10 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import dbconnection from "./config/db.js";
-import productRoutes from "../routes/productRoutes.js";
-import AuthRoutes from "../routes/AuthRoutes.js";
-import UserRoutes from "../routes/UserRoutes.js";
-import AdminRoutes from "../routes/AdminRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import AuthRoutes from "./routes/AuthRoutes.js";
+import UserRoutes from "./routes/UserRoutes.js";
+import AdminRoutes from "./routes/AdminRoutes.js";
 import fileUpload from "express-fileupload";
 
 // Load environment variables
