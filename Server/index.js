@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import dbconnection from "../config/db.js";
+import dbconnection from "./config/db.js";
 import productRoutes from "../routes/productRoutes.js";
 import AuthRoutes from "../routes/AuthRoutes.js";
 import UserRoutes from "../routes/UserRoutes.js";
@@ -12,8 +12,7 @@ import fileUpload from "express-fileupload";
 dotenv.config();
 
 const app = express();
-const frontendUrl =
-  process.env.FRONTEND_URL || "http://localhost:5173";
+const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
 
 app.use(
   cors({
